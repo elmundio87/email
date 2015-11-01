@@ -48,6 +48,21 @@ func (m *Message) attach(file string, inline bool) error {
 	return nil
 }
 
+func (m *Message) attachData(filename string, data []byte, inline bool) error {
+
+	m.Attachments[filename] = &Attachment{
+		Filename: filename,
+		Data:     data,
+		Inline:   inline,
+	}
+
+	return nil
+}
+
+func (m *Message) AttachData(filename string, data []byte) error {
+	return m.attachData(filename, data, false)
+}
+
 func (m *Message) Attach(file string) error {
 	return m.attach(file, false)
 }
