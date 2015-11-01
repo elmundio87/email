@@ -59,6 +59,7 @@ func (m *Message) attachData(filename string, data []byte, inline bool) error {
 	return nil
 }
 
+//Elmundio87: Attach data without having to write to the disk
 func (m *Message) AttachData(filename string, data []byte) error {
 	return m.attachData(filename, data, false)
 }
@@ -129,7 +130,7 @@ func (m *Message) Bytes() []byte {
 	boundary := "f46d043c813270fc6b04c2d223da"
 
 	if len(m.Attachments) > 0 {
-		buf.WriteString("Content-Type: multipart/mixed; boundary=" + boundary + "\r\n")
+		buf.WriteString("Content-Type: multipart/mixed; boundary=" + boundary + "\r\n\r\n")
 		buf.WriteString("--" + boundary + "\r\n")
 	}
 
